@@ -8,6 +8,8 @@ import Main from "./components/home/Main";
 import HomePage from "./components/home/HomePage";
 import CategoriMain from "./components/Categories/CategoriMain";
 import CategoriPage from "./components/Categories/CategoriPage";
+import ProfilePage from "./components/Profile/ProfilePage";
+import WishListPage from "./components/Wishlist/WishListPage";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <MenuBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          {/* <Route path="/" element={<WishListPage />} /> */}
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/categori" element={<CategoriPage />} />
         </Routes>
       </BrowserRouter>

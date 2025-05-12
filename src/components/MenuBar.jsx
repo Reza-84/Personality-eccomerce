@@ -23,10 +23,10 @@ export default function MenuBar(){
 				<i className="icon feather icon-heart"></i>
 				<span>Wishlist</span>
 			</a>
-			<a href="profile.html" className="nav-link">
+			<Link to="/profile" className="nav-link">
 				<i className="icon feather icon-user"></i>
 				<span>Profile</span>
-			</a>
+			</Link>
 		</div>
 	</div>
     </>
