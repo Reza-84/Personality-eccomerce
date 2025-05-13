@@ -11,6 +11,9 @@ import CategoriPage from "./components/Categories/CategoriPage";
 import ProfilePage from "./components/Profile/ProfilePage";
 import WishListPage from "./components/Wishlist/WishListPage";
 import CartPage from "./components/cart/CartPage";
+import Orders from "./components/orders/Orders";
+import EditProfile from "./components/Editprifile/Editprofile";
+import Address from "./components/Address/Address";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/categori" element={<CategoriPage />} />
           <Route path="/cart" element={<CartPage/>}/>
+          <Route path="/orders" element={<Orders/>} />
+          <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/address" element={<Address />} />
         </Routes>
       </BrowserRouter>
     </>

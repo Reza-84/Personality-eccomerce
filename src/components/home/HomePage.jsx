@@ -11,7 +11,7 @@ export default function HomePage(){
     const closeSidebar = () => setIsSidebarOpen(false);
     return<>
             <Header onToggleSidebar={toggleSidebar} />
-        <SideBar isOpen={isSidebarOpen} />
+        <SideBar isOpen={isSidebarOpen} isclose={closeSidebar} />
         {isSidebarOpen && (
           <div
             className="overlay"

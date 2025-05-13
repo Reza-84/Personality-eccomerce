@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function WishListHeader(){
+export default function WishListHeader({title}){
     return<>
         <header className="header shadow header-fixed border-0">
 			<div className="container">
@@ -9,7 +9,7 @@ export default function WishListHeader(){
 						<Link to="/" className="back-btn">
 							<i className="icon feather icon-chevron-left"></i>
 						</Link>
-						<h6 className="title">Wishlist</h6>
+						<h6 className="title">{title}</h6>
 					</div>
 					<div className="mid-content">
 					</div>

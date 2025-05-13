@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function SideBar({ isOpen }) {
+export default function SideBar({ isOpen,isclose }) {
   return (
     <div
       className={`sidebar ${isOpen ? "show" : ""}`}
@@ -8,7 +9,7 @@ export default function SideBar({ isOpen }) {
     >
       <a href="profile.html" className="author-box">
         <div className="dz-media">
-          <img src="images/user-profile.jpg" alt="author-image" />
+          <img src="/images/user-profile.jpg" alt="author-image" />
         </div>
         <div className="dz-info">
           <h5 className="name">John Doe</h5>
@@ -18,12 +19,12 @@ export default function SideBar({ isOpen }) {
 
       <ul className="nav navbar-nav">
         <li>
-          <a className="nav-link active" href="index.html">
+          <Link to="/" className="nav-link active" onClick={isclose}>
             <span className="dz-icon">
               <i className="icon feather icon-home"></i>
             </span>
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a className="nav-link active" href="index.html">
@@ -50,12 +51,12 @@ export default function SideBar({ isOpen }) {
           </a>
         </li>
         <li>
-          <a className="nav-link active" href="index.html">
+          <Link to="/wishlist" className="nav-link active">
             <span className="dz-icon">
               <i className="icon feather icon-heart"></i>
             </span>
             <span>Wishlist</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a className="nav-link active" href="index.html">
@@ -66,20 +67,20 @@ export default function SideBar({ isOpen }) {
           </a>
         </li>
         <li>
-          <a className="nav-link active" href="index.html">
+          <Link to="/cart" className="nav-link active">
             <span className="dz-icon">
               <i className="icon feather icon-shopping-cart"></i>
             </span>
             <span>My Cart</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="nav-link active" href="index.html">
+          <Link to="/profile" className="nav-link active">
             <span className="dz-icon">
               <i className="icon feather icon-user"></i>
             </span>
             <span>Profile</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a className="nav-link active" href="index.html">

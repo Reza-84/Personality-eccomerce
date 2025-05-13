@@ -4,7 +4,7 @@ import WishListMain from "./WishListMain";
 
 export default function WishListPage(){
     return<>
-        <WishListHeader />
+        <WishListHeader title={"wishlist"}/>
         <WishListMain />
         {/* <MenuBar /> */}
     </>

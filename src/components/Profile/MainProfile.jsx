@@ -1,6 +1,37 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function MainProfile(){
+	const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+	const userId = localStorage.getItem("userId");
+	if (!userId) return;
+  
+	axios.get(`http://localhost:7000/users/${userId}`)
+	  .then(response => {
+		console.log(response.data);
+		setUser(response.data);
+	  })
+	  .catch(error => {
+		console.error('خطا در گرفتن اطلاعات کاربر:', error);
+	  });
+  
+	axios.get("http://localhost:7000/orders", {
+	  params: { userId: userId }
+	})
+	  .then(response => {
+		setOrders(response.data);
+	  })
+	  .catch(error => {
+		console.error('خطا در گرفتن سفارشات:', error);
+	  });
+  }, []);
+
+  if (!user) return <p>در حال بارگذاری...</p>;
+
     return<>
         <div className="page-content space-top">
             <div className="container">
@@ -10,22 +41,22 @@ export default function MainProfile(){
 						<img src="/images/user-profile.jpg" alt="profile-image" />
 					</div>
 					<div className="profile-detail">
-						<h6 className="name">Thomas Djono</h6>
-						<span className="font-12">ID 02123141</span>
+						<h6 className="name">{user.name}</h6>
+						<span className="font-12">{user.id}</span>
 					</div>
-					<a href="edit-profile.html" className="edit-profile">
+					<Link to="/editprofile" className="edit-profile">
 						<i className="icon feather icon-edit-2"></i>
-					</a>
+					</Link>
 				</div>
 				<div className="content-box">
 					<ul className="row g-2">
 						<li className="col-6">							
-							<a href="order.html">
+							<Link to="/orders">
 								<div className="dz-icon-box">
 									<i className="icon feather icon-package"></i>
 								</div>
 								<span>Orders</span>
-							</a>
+							</Link>
 						</li>
 						
 						<li className="col-6">							
@@ -60,24 +91,24 @@ export default function MainProfile(){
 				<div className="dz-list style-1">
 					<ul>
 						<li>
-							<a href="edit-profile.html" className="item-content item-link">
+							<Link to="/editprofile" className="item-content item-link">
 								<div className="dz-icon">
 									<i className="icon feather icon-user"></i>
 								</div>
 								<div className="dz-inner">
 									<span className="title">Edit Profile</span>
 								</div>
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href="address.html" className="item-content item-link">
+							<Link to="/address" className="item-content item-link">
 								<div className="dz-icon">
 									<i className="icon feather icon-map-pin"></i>
 								</div>
 								<div className="dz-inner">
 									<span className="title">Saved Addresses</span>
 								</div>
-							</a>
+							</Link>
 						</li>
 						<li>
 							<a href="javascript:void(0);" className="item-content item-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLang" aria-controls="offcanvasLang">
