@@ -12,13 +12,13 @@ export default function MenuBar(){
 				<i className="icon feather icon-grid"></i>
 				<span>Categories</span>
 			</Link>
-			<a href="cart.html" className="nav-link cart-handle">
+			<Link to="/cart" className="nav-link cart-handle">
 				<div className="hexad-menu">
 					<img src="images/menu-shape-dark.svg" className="shape-dark" alt="" />
 					<img src="images/menu-shape-light.svg" className="shape-light" alt="" />
 					<i className="icon feather icon-shopping-bag"></i>
 				</div>
-			</a>
+			</Link>
 			<Link to="wishlist" className="nav-link">
 				<i className="icon feather icon-heart"></i>
 				<span>Wishlist</span>

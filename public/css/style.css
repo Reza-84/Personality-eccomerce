@@ -18401,3 +18401,18 @@ a{
 .container{
   padding: 15px 0px;
 }
+.distance{
+  bottom: 65px !important;
+  z-index: 1 !important;
+  opacity: 0.85;
+}
+.menubar-area{
+  z-index: 5 !important;
+}
+.total-cart{
+  opacity: 1 !important;
+  z-index: 8;
+}
+.btn-primary{
+  border-radius: 6px;
+}
