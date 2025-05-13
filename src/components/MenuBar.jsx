@@ -19,10 +19,10 @@ export default function MenuBar(){
 					<i className="icon feather icon-shopping-bag"></i>
 				</div>
 			</a>
-			<a href="wishlist.html" className="nav-link">
+			<Link to="wishlist" className="nav-link">
 				<i className="icon feather icon-heart"></i>
 				<span>Wishlist</span>
-			</a>
+			</Link>
 			<Link to="/profile" className="nav-link">
 				<i className="icon feather icon-user"></i>
 				<span>Profile</span>

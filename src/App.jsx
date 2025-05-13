@@ -18,7 +18,7 @@ function App() {
       <MenuBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/" element={<WishListPage />} /> */}
+          <Route path="/wishlist" element={<WishListPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/categori" element={<CategoriPage />} />
         </Routes>

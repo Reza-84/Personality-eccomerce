@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function MainProfile(){
     return<>
         <div className="page-content space-top">
@@ -25,13 +27,14 @@ export default function MainProfile(){
 								<span>Orders</span>
 							</a>
 						</li>
+						
 						<li className="col-6">							
-							<a href="wishlist.html">
+							<Link to="/wishlist">
 								<div className="dz-icon-box">
 									<i className="icon feather icon-heart"></i>
 								</div>
 								<span>Wishlist</span>
-							</a>
+							</Link>
 						</li>
 						<li className="col-6">							
 							<a href="coupon.html">
