@@ -9,9 +9,16 @@
     },
     {
       "id": "2",
-      "name": "حسن",
+      "name": "آیدی دو",
       "email": "hasan@example.com",
       "address": "تهران، خیابان ستارخان"
+    },
+    {
+      "id": "9914",
+      "name": "رضا معصومی فرد",
+      "email": "reza.masoumifard84@gmail.com",
+      "password": "r.z.m.s25004",
+      "address": "قم.نیروگاه.حافظ 9.پلاک 13"
     }
   ],
   "orders": [
@@ -50,21 +57,9 @@
   ],
   "addresses": [
     {
-      "id": 1,
+      "id": "3ef3",
       "userId": 1,
-      "address": "تهران، خیابان آزادی",
-      "isDefault": true
-    },
-    {
-      "id": 2,
-      "userId": 1,
-      "address": "تهران، خیابان ولیعصر",
-      "isDefault": false
-    },
-    {
-      "id": "6622",
-      "userId": 1,
-      "address": "نیروگاه/حافظ 9/پلاک 13",
+      "address": "قم نیرگاه حافظ 18 پلا 18",
       "isDefault": false
     }
   ]

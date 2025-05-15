@@ -3,7 +3,7 @@ export default function Header({ onToggleSidebar }) {
 	  <header className="header shadow header-fixed border-0">
 		<div className="container">
 		  <div className="header-content">
-			<div className="left-content">
+			<div className="left-content marginleft">
 
 				<i className="icon feather icon-menu cursor openside menu-toggler" onClick={onToggleSidebar}></i>
 			</div>
@@ -14,7 +14,7 @@ export default function Header({ onToggleSidebar }) {
 			</div>
 			<div className="right-content">
 			  <a href="search.html" className="search-icon">
-				<i className="icon feather icon-search"></i>
+				<i className="icon feather icon-search marginright"></i>
 			  </a>
 			</div>
 		  </div>

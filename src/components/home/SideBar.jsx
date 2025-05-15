@@ -1,7 +1,70 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function SideBar({ isOpen,isclose }) {
+export default function SideBar({ isOpen, isclose }) {
+  const [user, setUser] = useState(null);
+  const [isDark, setIsDark] = useState(false);
+  const [iconAnimation, setIconAnimation] = useState("");
+
+  useEffect(() => {
+    const toggle = document.getElementById("toggle-dark-menu");
+    if (!toggle) return;
+
+    const handleToggle = (e) => {
+      if (e.target.checked) {
+        setIconAnimation("animate-out");
+        setTimeout(() => {
+          document.body.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+          setIsDark(true);
+          setIconAnimation("animate-in");
+        }, 200);
+      } else {
+        setIconAnimation("animate-out");
+        setTimeout(() => {
+          document.body.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+          setIsDark(false);
+          setIconAnimation("animate-in");
+        }, 200);
+      }
+    };
+
+    toggle.addEventListener("change", handleToggle);
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      toggle.checked = true;
+      document.body.classList.add("dark");
+      setIsDark(true);
+    }
+
+    return () => {
+      toggle.removeEventListener("change", handleToggle);
+    };
+  }, []);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) return;
+
+    axios
+      .get(`http://localhost:7000/users/${userId}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error("خطا در گرفتن اطلاعات کاربر:", error);
+      });
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    setUser(null);
+    window.location.reload(); // می‌تونی این رو با ریدایرکت یا روش بهتر هم جایگزین کنی
+  };
+
   return (
     <div
       className={`sidebar ${isOpen ? "show" : ""}`}
@@ -12,8 +75,17 @@ export default function SideBar({ isOpen,isclose }) {
           <img src="/images/user-profile.jpg" alt="author-image" />
         </div>
         <div className="dz-info">
-          <h5 className="name">John Doe</h5>
-          <span>example@gmail.com</span>
+          {user ? (
+            <>
+              <h5 className="name">{user.name}</h5>
+              <span>{user.email}</span>
+            </>
+          ) : (
+            <>
+              <h5 className="name">کاربر مهمان</h5>
+              <span>لطفا وارد شوید</span>
+            </>
+          )}
         </div>
       </a>
 
@@ -21,15 +93,37 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <Link to="/" className="nav-link active" onClick={isclose}>
             <span className="dz-icon">
-              <i className="icon feather icon-home"></i>
+              <i className="icon feather icon-home side-icon"></i>
             </span>
             <span>Home</span>
           </Link>
         </li>
+
+        {!user && (
+          <>
+            <li>
+              <Link to="/login" className="nav-link active">
+                <span className="dz-icon">
+                  <i className="icon feather icon-log-in side-icon"></i>
+                </span>
+                <span>ورود</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/register" className="nav-link active">
+                <span className="dz-icon">
+                  <i className="icon feather icon-user-plus side-icon"></i>
+                </span>
+                <span>ثبت‌نام</span>
+              </Link>
+            </li>
+          </>
+        )}
+
         <li>
           <a className="nav-link active" href="index.html">
             <span className="dz-icon">
-              <i className="icon feather icon-grid"></i>
+              <i className="icon feather icon-grid side-icon"></i>
             </span>
             <span>Components</span>
           </a>
@@ -37,7 +131,7 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <a className="nav-link active" href="index.html">
             <span className="dz-icon">
-              <i className="icon feather icon-grid"></i>
+              <i className="icon feather icon-grid side-icon"></i>
             </span>
             <span>Pages</span>
           </a>
@@ -45,7 +139,7 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <a className="nav-link active" href="index.html">
             <span className="dz-icon">
-              <i className="icon feather icon-list"></i>
+              <i className="icon feather icon-list side-icon"></i>
             </span>
             <span>Featured</span>
           </a>
@@ -53,7 +147,7 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <Link to="/wishlist" className="nav-link active">
             <span className="dz-icon">
-              <i className="icon feather icon-heart"></i>
+              <i className="icon feather icon-heart side-icon"></i>
             </span>
             <span>Wishlist</span>
           </Link>
@@ -61,7 +155,7 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <a className="nav-link active" href="index.html">
             <span className="dz-icon">
-              <i className="icon feather icon-repeat"></i>
+              <i className="icon feather icon-repeat side-icon"></i>
             </span>
             <span>Orders</span>
           </a>
@@ -69,7 +163,7 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <Link to="/cart" className="nav-link active">
             <span className="dz-icon">
-              <i className="icon feather icon-shopping-cart"></i>
+              <i className="icon feather icon-shopping-cart side-icon"></i>
             </span>
             <span>My Cart</span>
           </Link>
@@ -77,20 +171,26 @@ export default function SideBar({ isOpen,isclose }) {
         <li>
           <Link to="/profile" className="nav-link active">
             <span className="dz-icon">
-              <i className="icon feather icon-user"></i>
+              <i className="icon feather icon-user side-icon"></i>
             </span>
             <span>Profile</span>
           </Link>
         </li>
-        <li>
-          <a className="nav-link active" href="index.html">
-            <span className="dz-icon">
-              <i className="icon feather icon-log-out"></i>
-            </span>
-            <span>Logout</span>
-          </a>
-        </li>
-        {/* بقیه آیتم‌ها همینطور ادامه دارن */}
+
+        {user && (
+          <li>
+            <button
+              onClick={handleLogout}
+              className="nav-link active btn-logout"
+              style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+            >
+              <span className="dz-icon">
+                <i className="icon feather icon-log-out side-icon"></i>
+              </span>
+              <span>خروج از حساب کاربری</span>
+            </button>
+          </li>
+        )}
       </ul>
 
       <div className="sidebar-bottom">
@@ -102,7 +202,7 @@ export default function SideBar({ isOpen,isclose }) {
               data-bs-target="#offcanvasBottom"
               aria-controls="offcanvasBottom"
             >
-              <span className="dz-icon">{/* SVG از قبل درسته */}</span>
+              <span className="dz-icon">{/* آیکون رنگ */}</span>
               <span>Color Theme</span>
               <div className="color-active ms-auto">
                 <span>Active</span>
@@ -114,7 +214,11 @@ export default function SideBar({ isOpen,isclose }) {
           <li>
             <a className="mode" href="#">
               <span className="dz-icon">
-                <i className="icon feather icon-moon"></i>
+                <i
+                  className={`icon feather ${
+                    isDark ? "icon-moon" : "icon-sun"
+                  } theme-icon ${iconAnimation}`}
+                ></i>
               </span>
               <span>Dark Mode</span>
               <div className="custom-switch">
